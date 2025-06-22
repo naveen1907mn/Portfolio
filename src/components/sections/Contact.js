@@ -13,6 +13,10 @@ const ContactSection = styled.section`
     padding: 60px 0;
     min-height: auto;
   }
+
+  @media (max-width: 480px) {
+    padding: 40px 0;
+  }
 `;
 
 const Container = styled.div`
@@ -28,6 +32,11 @@ const Container = styled.div`
     grid-template-columns: 1fr;
     gap: 30px;
     padding: 0 16px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 25px;
+    padding: 0 12px;
   }
 `;
 
@@ -45,6 +54,12 @@ const Title = styled.h2`
 
   @media (max-width: 768px) {
     margin-bottom: 16px;
+    font-size: 36px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 28px;
+    margin-bottom: 14px;
   }
 `;
 
@@ -56,6 +71,13 @@ const Description = styled.p`
 
   @media (max-width: 768px) {
     margin-bottom: 24px;
+    font-size: 16px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.5;
   }
 `;
 
@@ -67,6 +89,12 @@ const SocialLinks = styled.div`
   @media (max-width: 768px) {
     justify-content: center;
     margin-bottom: 24px;
+    gap: 15px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 12px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -95,6 +123,12 @@ const SocialLink = styled.a`
     height: 45px;
     font-size: 20px;
   }
+
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
 `;
 
 const FormContainer = styled.div`
@@ -113,7 +147,12 @@ const FormContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 24px;
+    padding: 30px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px;
+    border-radius: 15px;
   }
 `;
 
@@ -153,6 +192,13 @@ const Input = styled.input`
 
   @media (max-width: 768px) {
     padding: 10px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 8px;
+    font-size: 13px;
+    border-radius: 8px;
   }
 
   &:focus {
@@ -176,6 +222,14 @@ const TextArea = styled.textarea`
   @media (max-width: 768px) {
     padding: 10px;
     min-height: 120px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 8px;
+    min-height: 100px;
+    font-size: 13px;
+    border-radius: 8px;
   }
 
   &:focus {
@@ -200,6 +254,13 @@ const SubmitButton = styled.button`
   @media (max-width: 768px) {
     padding: 12px 24px;
     width: 100%;
+    font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px 20px;
+    font-size: 13px;
+    border-radius: 8px;
   }
 
   &:hover {

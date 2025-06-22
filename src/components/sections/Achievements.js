@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import achievementImage from '../../assets/Acheievement.png';
 
 const AchievementsSection = styled.section`
   min-height: 100vh;
@@ -12,15 +13,68 @@ const AchievementsSection = styled.section`
     padding: 60px 0;
     min-height: auto;
   }
+
+  @media (max-width: 480px) {
+    padding: 40px 0;
+  }
 `;
 
 const Container = styled.div`
   max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 
   @media (max-width: 768px) {
     padding: 0 16px;
+    gap: 30px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 12px;
+    gap: 25px;
+  }
+`;
+
+const Content = styled.div`
+  width: 100%;
+`;
+
+const ImageContainer = styled.div`
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.2));
+  }
+
+  @media (max-width: 1200px) {
+    order: -1;
+    max-width: 500px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 400px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 300px;
   }
 `;
 
@@ -30,11 +84,21 @@ const Title = styled.h2`
   margin-bottom: 50px;
   text-align: center;
   color: #fff;
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
 `;
 
 const AchievementsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   margin-bottom: 50px;
 
@@ -45,6 +109,12 @@ const AchievementsGrid = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 15px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -67,6 +137,13 @@ const AchievementCard = styled.div`
   }
 
   @media (max-width: 768px) {
+    padding: 25px;
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+
+  @media (max-width: 480px) {
     padding: 20px;
   }
 `;
@@ -81,6 +158,11 @@ const AchievementIcon = styled.div`
     font-size: 40px;
     margin-bottom: 15px;
   }
+
+  @media (max-width: 480px) {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
 `;
 
 const AchievementTitle = styled.h3`
@@ -92,6 +174,10 @@ const AchievementTitle = styled.h3`
   @media (max-width: 768px) {
     font-size: 20px;
   }
+
+  @media (max-width: 480px) {
+    font-size: 18px;
+  }
 `;
 
 const AchievementDescription = styled.p`
@@ -101,6 +187,11 @@ const AchievementDescription = styled.p`
 
   @media (max-width: 768px) {
     font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 13px;
+    line-height: 1.5;
   }
 `;
 
@@ -141,21 +232,25 @@ const Achievements = () => {
   return (
     <AchievementsSection id="achievements">
       <Container>
-        <Title className="holographic">
-          Achievements & Certifications
-        </Title>
-
-        <AchievementsGrid>
-          {achievements.map((achievement, index) => (
-            <AchievementCard key={index}>
-              <AchievementIcon>{achievement.icon}</AchievementIcon>
-              <AchievementTitle>{achievement.title}</AchievementTitle>
-              <AchievementDescription>
-                {achievement.description}
-              </AchievementDescription>
-            </AchievementCard>
-          ))}
-        </AchievementsGrid>
+        <Content>
+          <Title className="holographic">
+            Achievements & Certifications
+          </Title>
+          <AchievementsGrid>
+            {achievements.map((achievement, index) => (
+              <AchievementCard key={index}>
+                <AchievementIcon>{achievement.icon}</AchievementIcon>
+                <AchievementTitle>{achievement.title}</AchievementTitle>
+                <AchievementDescription>
+                  {achievement.description}
+                </AchievementDescription>
+              </AchievementCard>
+            ))}
+          </AchievementsGrid>
+        </Content>
+        <ImageContainer>
+          <img src={achievementImage} alt="Achievements Illustration" />
+        </ImageContainer>
       </Container>
     </AchievementsSection>
   );

@@ -12,6 +12,10 @@ const SkillsSection = styled.section`
     padding: 60px 0;
     min-height: auto;
   }
+
+  @media (max-width: 480px) {
+    padding: 40px 0;
+  }
 `;
 
 const Container = styled.div`
@@ -21,6 +25,10 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     padding: 0 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 12px;
   }
 `;
 
@@ -33,6 +41,12 @@ const Title = styled.h2`
 
   @media (max-width: 768px) {
     margin-bottom: 30px;
+    font-size: clamp(28px, 5vw, 36px);
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 25px;
+    font-size: clamp(24px, 4vw, 28px);
   }
 `;
 
@@ -44,8 +58,18 @@ const SkillsGrid = styled.div`
 
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 768px) {
     gap: 20px;
     margin-bottom: 30px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 15px;
+    margin-bottom: 25px;
   }
 `;
 
@@ -64,7 +88,17 @@ const SkillCategory = styled.div`
   }
 
   @media (max-width: 768px) {
+    padding: 25px;
+    border-radius: 15px;
+    
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  @media (max-width: 480px) {
     padding: 20px;
+    border-radius: 12px;
   }
 `;
 
@@ -75,7 +109,13 @@ const CategoryTitle = styled.h3`
   color: #00ffff;
 
   @media (max-width: 768px) {
+    font-size: clamp(18px, 3vw, 20px);
     margin-bottom: 15px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 18px;
+    margin-bottom: 12px;
   }
 `;
 
@@ -84,6 +124,10 @@ const SkillItem = styled.div`
 
   @media (max-width: 768px) {
     margin-bottom: 12px;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 10px;
   }
 
   &:last-child {
@@ -105,6 +149,12 @@ const SkillName = styled.div`
 
   @media (max-width: 768px) {
     margin-bottom: 6px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 5px;
+    font-size: 13px;
   }
 `;
 
@@ -118,6 +168,10 @@ const ProgressBar = styled.div`
 
   @media (max-width: 768px) {
     height: 6px;
+  }
+
+  @media (max-width: 480px) {
+    height: 5px;
   }
 `;
 

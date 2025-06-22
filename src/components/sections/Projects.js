@@ -12,6 +12,10 @@ const ProjectsSection = styled.section`
     padding: 60px 0;
     min-height: auto;
   }
+
+  @media (max-width: 480px) {
+    padding: 40px 0;
+  }
 `;
 
 const Container = styled.div`
@@ -21,6 +25,10 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     padding: 0 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 12px;
   }
 `;
 
@@ -33,6 +41,12 @@ const Title = styled.h2`
 
   @media (max-width: 768px) {
     margin-bottom: 30px;
+    font-size: clamp(28px, 5vw, 36px);
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 25px;
+    font-size: clamp(24px, 4vw, 28px);
   }
 `;
 
@@ -53,7 +67,9 @@ const ProjectsGrid = styled.div`
   }
 
   @media (max-width: 480px) {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
   }
 `;
 
@@ -74,11 +90,16 @@ const ProjectCard = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 20px;
+    padding: 25px;
     
     &:hover {
       transform: translateY(-5px);
     }
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px;
+    border-radius: 15px;
   }
 `;
 
@@ -87,6 +108,16 @@ const ProjectTitle = styled.h3`
   font-weight: 600;
   margin-bottom: 15px;
   color: #00ffff;
+
+  @media (max-width: 768px) {
+    font-size: clamp(18px, 3vw, 20px);
+    margin-bottom: 12px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
 `;
 
 const ProjectDescription = styled.p`
@@ -95,6 +126,19 @@ const ProjectDescription = styled.p`
   line-height: 1.6;
   margin-bottom: 20px;
   min-height: 80px;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    min-height: 70px;
+    margin-bottom: 15px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 13px;
+    min-height: auto;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
 `;
 
 const TechStack = styled.div`
@@ -102,6 +146,16 @@ const TechStack = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 15px;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 6px;
+    margin-top: 10px;
+  }
 `;
 
 const TechTag = styled.span`
@@ -111,6 +165,17 @@ const TechTag = styled.span`
   border-radius: 15px;
   font-size: 14px;
   border: 1px solid rgba(0, 255, 255, 0.2);
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+    padding: 4px 8px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+    padding: 3px 7px;
+    border-radius: 12px;
+  }
 `;
 
 const projects = [
