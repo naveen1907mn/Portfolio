@@ -299,7 +299,7 @@ const Contact = () => {
             Feel free to reach out for collaborations or just a friendly hello! I'll try my best to get back to you as soon as possible.
           </Description>
           <SocialLinks>
-            <SocialLink href="https://github.com/Naveen1907-swing" target="_blank" rel="noopener noreferrer">
+            <SocialLink href="https://github.com/Naveenm1907" target="_blank" rel="noopener noreferrer">
               <FaGithub />
             </SocialLink>
             <SocialLink href="https://linkedin.com/in/naveen-mayandi/" target="_blank" rel="noopener noreferrer">
