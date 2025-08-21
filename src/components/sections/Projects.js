@@ -1,232 +1,323 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import bgImage from '../../assets/bg.png';
 
 const ProjectsSection = styled.section`
   min-height: 100vh;
   display: flex;
   align-items: center;
+  padding: 120px 0 100px;
+  position: relative;
+  background-image: url(${bgImage});
+  background-size: cover;
+  background-position: center;
   background-color: #050816;
-  padding: 100px 0;
+  color: #ffffff;
 
-  @media (max-width: 768px) {
-    padding: 60px 0;
-    min-height: auto;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(5, 8, 22, 0.8);
+    z-index: 1;
   }
 
-  @media (max-width: 480px) {
-    padding: 40px 0;
+  @media (max-width: 768px) {
+    padding: 80px 0 70px;
+    min-height: auto;
   }
 `;
 
 const Container = styled.div`
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 30px;
+  position: relative;
+  z-index: 2;
 
   @media (max-width: 768px) {
-    padding: 0 16px;
+    padding: 0 20px;
   }
+`;
 
-  @media (max-width: 480px) {
-    padding: 0 12px;
+const SectionHeader = styled.div`
+  margin-bottom: 60px;
+  max-width: 800px;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 40px;
+  }
+`;
+
+const SubHeading = styled.span`
+  display: inline-block;
+  font-family: 'Source Serif Pro', serif;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: italic;
+  color: #e25c45;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: #e25c45;
   }
 `;
 
 const Title = styled.h2`
+  font-family: 'Outfit', sans-serif;
   font-size: clamp(36px, 6vw, 48px);
   font-weight: 700;
-  margin-bottom: 50px;
-  text-align: center;
-  color: #fff;
+  margin-bottom: 20px;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 
   @media (max-width: 768px) {
-    margin-bottom: 30px;
-    font-size: clamp(28px, 5vw, 36px);
+    margin-bottom: 16px;
   }
+`;
 
-  @media (max-width: 480px) {
-    margin-bottom: 25px;
-    font-size: clamp(24px, 4vw, 28px);
+const Description = styled.p`
+  font-family: 'Source Serif Pro', serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #e0e0e0;
+  max-width: 600px;
+  
+  @media (max-width: 768px) {
+    font-size: 16px;
   }
 `;
 
 const ProjectsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   gap: 30px;
-  margin-bottom: 50px;
 
-  @media (max-width: 1200px) {
-    grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 1024px) {
+    gap: 25px;
   }
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-bottom: 30px;
-  }
-
-  @media (max-width: 480px) {
     grid-template-columns: 1fr;
-    gap: 15px;
-    margin-bottom: 25px;
+    gap: 30px;
   }
 `;
 
-const ProjectCard = styled.div`
-  background: rgba(0, 255, 255, 0.05);
+const ProjectCard = styled(motion.div)`
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 30px;
-  cursor: pointer;
+  border-radius: 8px;
+  padding: ${props => props.featured ? '35px 30px' : '30px'};
+  position: relative;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  grid-column: ${props => props.featured ? 'span 6' : 'span 4'};
+  display: flex;
+  flex-direction: column;
   transition: all 0.3s ease;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
-
+  
   &:hover {
-    transform: translateY(-10px);
-    background: rgba(0, 255, 255, 0.1);
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.08);
   }
 
+  @media (max-width: 1024px) {
+    grid-column: ${props => props.featured ? 'span 6' : 'span 6'};
+  }
+  
   @media (max-width: 768px) {
-    padding: 25px;
-    
-    &:hover {
-      transform: translateY(-5px);
-    }
+    grid-column: span 12;
+    padding: ${props => props.featured ? '30px 25px' : '25px'};
   }
+`;
 
-  @media (max-width: 480px) {
-    padding: 20px;
-    border-radius: 15px;
-  }
+const ProjectTag = styled.span`
+  display: inline-block;
+  font-family: 'Source Serif Pro', serif;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: italic;
+  color: #e25c45;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
 `;
 
 const ProjectTitle = styled.h3`
-  font-size: clamp(20px, 4vw, 24px);
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #00ffff;
-
+  font-family: 'Outfit', sans-serif;
+  font-size: ${props => props.featured ? '24px' : '20px'};
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #ffffff;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  
   @media (max-width: 768px) {
-    font-size: clamp(18px, 3vw, 20px);
-    margin-bottom: 12px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: ${props => props.featured ? '22px' : '18px'};
+    margin-bottom: 14px;
   }
 `;
 
 const ProjectDescription = styled.p`
-  font-size: clamp(14px, 3vw, 16px);
-  color: #aaa6c3;
+  font-family: 'Source Serif Pro', serif;
+  font-size: ${props => props.featured ? '16px' : '15px'};
+  color: #e0e0e0;
   line-height: 1.6;
-  margin-bottom: 20px;
-  min-height: 80px;
+  margin-bottom: 24px;
+  flex-grow: 1;
 
   @media (max-width: 768px) {
-    font-size: 14px;
-    min-height: 70px;
-    margin-bottom: 15px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 13px;
-    min-height: auto;
-    margin-bottom: 12px;
-    line-height: 1.5;
+    font-size: 15px;
+    margin-bottom: 20px;
   }
 `;
 
 const TechStack = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 15px;
-
-  @media (max-width: 768px) {
-    gap: 8px;
-    margin-top: 12px;
-  }
-
-  @media (max-width: 480px) {
-    gap: 6px;
-    margin-top: 10px;
-  }
+  gap: 8px;
+  margin-top: auto;
 `;
 
 const TechTag = styled.span`
-  background: rgba(0, 255, 255, 0.1);
-  color: #00ffff;
-  padding: 5px 10px;
-  border-radius: 15px;
+  font-family: 'Outfit', sans-serif;
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+  padding: 6px 12px;
+  border-radius: 4px;
   font-size: 14px;
-  border: 1px solid rgba(0, 255, 255, 0.2);
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
 
   @media (max-width: 768px) {
     font-size: 13px;
-    padding: 4px 8px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 12px;
-    padding: 3px 7px;
-    border-radius: 12px;
+    padding: 5px 10px;
   }
 `;
 
 const projects = [
   {
-    title: "Jai Shree Crackers",
-    description: "An e-commerce platform for crackers with secure payment integration and real-time inventory management.",
-    tech: ["React", "Node.js", "MongoDB", "Stripe"]
+    tag: "E-commerce",
+    title: "JAI SHREE CRACKERS",
+    description: "Developed complete e-commerce solution with secure payment integration and inventory management. Built responsive frontend with Bootstrap and implemented shopping cart with session management. Created admin panel with dashboard analytics, order tracking, and customer management.",
+    tech: ["PHP", "MySQL", "JavaScript", "Bootstrap", "Session Management"],
+    featured: true,
+    link: "jaishreecrackers.com"
   },
   {
-    title: "SWING",
-    description: "A social networking platform for college students to connect, share resources, and collaborate on projects.",
-    tech: ["Flutter", "Firebase", "Cloud Functions"]
+    tag: "College Service",
+    title: "SWING Platform",
+    description: "Developed Laravel-based photocopying service platform with user authentication and order management. Implemented real-time order tracking, payment integration, and automated email notifications. Built REST API for mobile app integration and admin dashboard for service management.",
+    tech: ["PHP", "Laravel", "MySQL", "REST API"],
+    link: "doswing.host20.uk",
+    featured: true
   },
   {
-    title: "UNI MAPS",
-    description: "Interactive campus navigation system with real-time location tracking and event notifications.",
-    tech: ["React Native", "Google Maps API", "Node.js"]
+    tag: "Finance",
+    title: "Expense Tracker with Analytics",
+    description: "Built comprehensive Flutter app with local storage, state management, and FL Chart analytics. Implemented CRUD operations, expense categorization, date filtering, and theme support. Added data export functionality and spending insights with visual charts.",
+    tech: ["Flutter", "Dart", "Hive", "Provider", "FL Chart"],
+    link: "GitHub"
   },
   {
-    title: "Heart Disease Prediction",
-    description: "ML-powered system for predicting heart disease risks using patient health data.",
-    tech: ["Python", "TensorFlow", "Scikit-learn"]
+    tag: "Navigation",
+    title: "UNI MAPS Route Optimization",
+    description: "Created Flutter app with Google Maps SDK integration and GPS-based route optimization. Implemented real-time location tracking, custom markers, and turn-by-turn navigation. Added delivery status management and route history with performance analytics.",
+    tech: ["Flutter", "Google Maps API", "GPS", "Route Optimization"],
+    link: "GitHub"
   },
   {
-    title: "Plant Disease Detection",
-    description: "Computer vision application to identify plant diseases from leaf images using deep learning.",
-    tech: ["Python", "OpenCV", "TensorFlow"]
-  },
-  {
-    title: "Feedback System",
-    description: "Automated feedback collection and analysis system for educational institutions.",
-    tech: ["React", "Express", "MongoDB", "NLP"]
+    tag: "Agriculture AI",
+    title: "3D Plant Disease Detection",
+    description: "Built Flutter app with TensorFlow Lite integration for real-time crop disease detection. Implemented camera integration, image preprocessing, and ML model inference with 90% accuracy. Created disease database with treatment recommendations and farmer consultation features.",
+    tech: ["Flutter", "TensorFlow Lite", "Python", "Camera Integration"],
+    link: "GitHub"
   }
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+};
+
 const Projects = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  });
+  
   return (
     <ProjectsSection id="projects">
       <Container>
-        <Title className="holographic">
-          Featured Projects
-        </Title>
+        <SectionHeader>
+          <SubHeading>My Work</SubHeading>
+          <Title>Featured Projects</Title>
+          <Description>
+            A collection of projects that showcase my skills and passion for creating innovative solutions to real-world problems.
+          </Description>
+        </SectionHeader>
 
-        <ProjectsGrid>
+        <ProjectsGrid
+          as={motion.div}
+          ref={ref}
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
           {projects.map((project, index) => (
-            <ProjectCard key={index}>
-              <ProjectTitle>{project.title}</ProjectTitle>
-              <ProjectDescription>{project.description}</ProjectDescription>
+            <ProjectCard 
+              key={index}
+              variants={cardVariants}
+              featured={project.featured}
+            >
+              <ProjectTag>{project.tag}</ProjectTag>
+              <ProjectTitle featured={project.featured}>
+                {project.title}
+              </ProjectTitle>
+              <ProjectDescription featured={project.featured}>
+                {project.description}
+              </ProjectDescription>
               <TechStack>
                 {project.tech.map((tech, i) => (
-                  <TechTag key={i}>{tech}</TechTag>
+                  <TechTag key={i}>
+                    {tech}
+                  </TechTag>
                 ))}
               </TechStack>
             </ProjectCard>

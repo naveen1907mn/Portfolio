@@ -14,14 +14,15 @@ import Contact from './components/sections/Contact';
 
 const AppContainer = styled.div`
   min-height: 100vh;
-  background: #050816;
-  color: #ffffff;
+  background: #f4f1eb;
+  color: #2d2d2d;
   overflow-x: hidden;
+  position: relative;
 `;
 
 function App() {
   return (
-    <AppContainer>
+    <AppContainer className="texture-overlay">
       <GlobalStyle />
       <Navbar />
       <Hero />
