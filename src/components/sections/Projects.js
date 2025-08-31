@@ -282,7 +282,7 @@ const projects = [
     title: "UNI MAPS Route Optimization",
     description: "Created Flutter app with Google Maps SDK integration and GPS-based route optimization. Implemented real-time location tracking, custom markers, and turn-by-turn navigation. Added delivery status management and route history with performance analytics.",
     tech: ["Flutter", "Google Maps API", "GPS", "Route Optimization"],
-    link: "https://github.com/Naveenm1907/uni-maps",
+    link: "https://github.com/Naveenm1907/msdp",
     linkType: "github"
   },
   {
@@ -290,7 +290,7 @@ const projects = [
     title: "3D Plant Disease Detection",
     description: "Built Flutter app with TensorFlow Lite integration for real-time crop disease detection. Implemented camera integration, image preprocessing, and ML model inference with 90% accuracy. Created disease database with treatment recommendations and farmer consultation features.",
     tech: ["Flutter", "TensorFlow Lite", "Python", "Camera Integration"],
-    link: "https://github.com/Naveenm1907/plant-disease-detection",
+    link: "https://github.com/Naveenm1907/Plant_Guard",
     linkType: "github"
   }
 ];
