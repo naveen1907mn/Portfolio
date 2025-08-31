@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import bgImage from '../../assets/bg.png';
+import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 
 const ProjectsSection = styled.section`
   min-height: 100vh;
@@ -190,7 +191,7 @@ const TechStack = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: auto;
+  margin-bottom: 20px;
 `;
 
 const TechTag = styled.span`
@@ -214,43 +215,83 @@ const TechTag = styled.span`
   }
 `;
 
+const ProjectLinks = styled.div`
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+`;
+
+const ProjectLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(226, 92, 69, 0.1);
+  color: #e25c45;
+  text-decoration: none;
+  border-radius: 6px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid rgba(226, 92, 69, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    background: #e25c45;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(226, 92, 69, 0.3);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+`;
+
 const projects = [
   {
     tag: "E-commerce",
     title: "JAI SHREE CRACKERS",
     description: "Developed complete e-commerce solution with secure payment integration and inventory management. Built responsive frontend with Bootstrap and implemented shopping cart with session management. Created admin panel with dashboard analytics, order tracking, and customer management.",
-    tech: ["PHP", "MySQL", "JavaScript", "Bootstrap", "Session Management"],
+    tech: [ "React", "PHP", "MySQL", "JavaScript", "Bootstrap", "Session Management"],
     featured: true,
-    link: "jaishreecrackers.com"
+    link: "https://jaishreecrackers.com",
+    linkType: "live"
   },
   {
     tag: "College Service",
     title: "SWING Platform",
     description: "Developed Laravel-based photocopying service platform with user authentication and order management. Implemented real-time order tracking, payment integration, and automated email notifications. Built REST API for mobile app integration and admin dashboard for service management.",
     tech: ["PHP", "Laravel", "MySQL", "REST API"],
-    link: "doswing.host20.uk",
-    featured: true
+    link: "https://doswing.host20.uk",
+    featured: true,
+    linkType: "live"
   },
   {
     tag: "Finance",
     title: "Expense Tracker with Analytics",
     description: "Built comprehensive Flutter app with local storage, state management, and FL Chart analytics. Implemented CRUD operations, expense categorization, date filtering, and theme support. Added data export functionality and spending insights with visual charts.",
     tech: ["Flutter", "Dart", "Hive", "Provider", "FL Chart"],
-    link: "GitHub"
+    link: "https://github.com/Naveenm1907/expense-tracker",
+    linkType: "github"
   },
   {
     tag: "Navigation",
     title: "UNI MAPS Route Optimization",
     description: "Created Flutter app with Google Maps SDK integration and GPS-based route optimization. Implemented real-time location tracking, custom markers, and turn-by-turn navigation. Added delivery status management and route history with performance analytics.",
     tech: ["Flutter", "Google Maps API", "GPS", "Route Optimization"],
-    link: "GitHub"
+    link: "https://github.com/Naveenm1907/uni-maps",
+    linkType: "github"
   },
   {
     tag: "Agriculture AI",
     title: "3D Plant Disease Detection",
     description: "Built Flutter app with TensorFlow Lite integration for real-time crop disease detection. Implemented camera integration, image preprocessing, and ML model inference with 90% accuracy. Created disease database with treatment recommendations and farmer consultation features.",
     tech: ["Flutter", "TensorFlow Lite", "Python", "Camera Integration"],
-    link: "GitHub"
+    link: "https://github.com/Naveenm1907/plant-disease-detection",
+    linkType: "github"
   }
 ];
 
@@ -281,6 +322,14 @@ const Projects = () => {
     triggerOnce: true,
     threshold: 0.1
   });
+  
+  const getLinkIcon = (linkType) => {
+    return linkType === 'github' ? <FaGithub /> : <FaExternalLinkAlt />;
+  };
+  
+  const getLinkText = (linkType) => {
+    return linkType === 'github' ? 'View Project' : 'View Project';
+  };
   
   return (
     <ProjectsSection id="projects">
@@ -320,6 +369,16 @@ const Projects = () => {
                   </TechTag>
                 ))}
               </TechStack>
+              <ProjectLinks>
+                <ProjectLink 
+                  href={project.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  {getLinkIcon(project.linkType)}
+                  {getLinkText(project.linkType)}
+                </ProjectLink>
+              </ProjectLinks>
             </ProjectCard>
           ))}
         </ProjectsGrid>
